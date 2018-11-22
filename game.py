@@ -1,5 +1,6 @@
 import arcade
 import random
+import os
 
 from player import Player
 from wall import Wall
@@ -51,6 +52,7 @@ class MyGame(arcade.Window):
         output = f"Score: {self.player.getScore()}"
         arcade.draw_text(output, 10, 20, arcade.color.WHITE, 15)
 
+
     def on_key_press(self, key, modifiers):
         self.player.move(key)
 
@@ -68,6 +70,13 @@ class MyGame(arcade.Window):
         for coin in player_coin_hit_list:
             coin.kill()
             self.player.setScore(self.player.getScore() + 1)
+            if self.player.getScore()==1:
+                print("Welcome to level 1! Collect all the coins to proceed.")
+            if self.player.getScore()==50:
+                print("Congrats on collecting. You may continue.")
+                os._exit(1)
+                os.system('Level_2.py')
+
 
         # end of where player collects coin
 
